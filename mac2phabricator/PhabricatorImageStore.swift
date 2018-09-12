@@ -19,6 +19,20 @@ import Foundation
 import Crashlytics
 import AFNetworking
 
+extension NSImage {
+    func resizeImage(width: CGFloat, height: CGFloat) -> NSImage {
+        let img = NSImage(size: NSSize(width: width, height: height))
+        
+        img.lockFocus()
+        let ctx = NSGraphicsContext.current()
+        ctx?.imageInterpolation = .high
+        self.draw(in: NSMakeRect(0, 0, width, height), from: NSMakeRect(0, 0, size.width, size.height), operation: NSCompositingOperation.copy, fraction: 1)
+        img.unlockFocus()
+        
+        return img
+    }
+}
+
 class PhabricatorImageStore {
     
     static let shared = PhabricatorImageStore()
@@ -80,6 +94,7 @@ class PhabricatorImageStore {
     /// - parameter image: The image for which to request a preview image.
     /// - parameter completionHandler: The completion handler to call if the
     /// image has been retrieved successfully.
+    // TODO: completionHandler should take in a NSImage?
     func requestPreviewImage(forImage image: PhabricatorImage, completionHandler: @escaping (NSImage) -> Void) {
 
         let manager = AFHTTPSessionManager()
@@ -95,38 +110,29 @@ class PhabricatorImageStore {
             parameters: params,
             success: {
                 (task: URLSessionDataTask, responseObject: Any?) in
-                print("success")
-                print(responseObject!)
+//                print("success")
+//                print(responseObject!)
                 
-                let resultObj = (responseObject as! NSDictionary)["result"]! as! String
-                let imageData = NSData(base64Encoded: resultObj, options: [])
-                let image = NSImage(data: imageData as! Data)
-                DispatchQueue.main.async(execute: {
-                    completionHandler(image!)
-                })
-
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    let resultObj = (responseObject as! NSDictionary)["result"]! as! String
+                    let imageData = NSData(base64Encoded: resultObj, options: [])
+                    guard let data = imageData as Data? else {
+                        // TOOD: Implement error handling
+                        print("error")
+                        return
+                    }
+                    
+                    let image = NSImage(data: data)?.resizeImage(width: 40, height: 40)
+                    DispatchQueue.main.async(execute: {
+                        completionHandler(image!)
+                    })
+                }
         }, failure: {
             (task: URLSessionDataTask?, error: Error) in
+            // TOOD: Implement error handling
             print("error")
         })
-        
-        
-//        guard let url = image.secureURL(with: .smallSquareSize) else {
-//            return
-//        }
-//        
-//        if let cachedImage = cachedImages[url] {
-//            completionHandler(cachedImage)
-//            return
-//        }
-//
-//        URLSession.shared.dataTask(with: url, completionHandler: { (data, _, _) in
-//            if let data = data, let image = NSImage(data: data) {
-//                DispatchQueue.main.async(execute: {
-//                    completionHandler(image)
-//                })
-//            }
-//        }).resume()
     }
 
+    
 }

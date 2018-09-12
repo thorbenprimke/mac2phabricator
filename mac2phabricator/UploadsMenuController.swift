@@ -46,7 +46,10 @@ class UploadsMenuController: MenuController {
             PhabricatorImageStore.shared.requestPreviewImage(
                 forImage: image,
                 completionHandler: { (image) in
-                    image.size = NSSize(width: 40, height: 40)
+                    // TODO: Check if there is an image and if not change title to error or retry
+//                    guard let image = image else {
+//                        menuItem.title = "bla"
+//                    }
                     menuItem.image = image
             })
             
@@ -57,9 +60,7 @@ class UploadsMenuController: MenuController {
         if PhabricatorImageStore.shared.images.isEmpty {
             menu.addItem(withTitle: "No Recent Uploads")
         } else {
-            menu.addItem(withTitle: "Clear Uploads",
-                         action: #selector(clearUploads),
-                         target: self)
+            menu.addItem(withTitle: "Clear Uploads", action: #selector(clearUploads), target: self)
         }
     }
     
@@ -68,9 +69,7 @@ class UploadsMenuController: MenuController {
     func uploadItemMenu(forImage image: PhabricatorImage) -> NSMenu {
         let menu = NSMenu()
         
-        menu.addItem(withTitle: "Copy Image URL",
-                     action: #selector(PhabricatorImage.copyURL),
-                     target: image)
+        menu.addItem(withTitle: "Copy Image URL", action: #selector(PhabricatorImage.copyURL), target: image)
         
         menu.addItem(.separator())
         return menu
