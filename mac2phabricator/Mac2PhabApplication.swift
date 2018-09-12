@@ -19,11 +19,14 @@ class Mac2PhabApplication : NSApplication {
                     case "c":
                         if sendAction(#selector(NSText.copy(_:)), to:nil, from:self) { return }
                     case "v":
-                        if sendAction(Selector("paste:"), to:nil, from:self) { return }
+                        if sendAction(#selector(NSText.paste(_:)), to:nil, from:self) { return }
                     case "z":
-                        if sendAction(Selector("undo:"), to:nil, from:self) { return }
+                        // TODO: Figure out who to call undo
+                        if sendAction(Selector(("undo:")), to:nil, from:self) { return }
                     case "a":
-                        if sendAction(Selector("selectAll:"), to:nil, from:self) { return }
+                        if sendAction(#selector(NSResponder.selectAll(_:)), to:nil, from:self) { return }
+                    case "w":
+                        if sendAction(#selector(NSWindow.performClose(_:)), to: nil, from: self) { return }
                     default:
                         break
                 }
