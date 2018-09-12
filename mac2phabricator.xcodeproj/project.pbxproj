@@ -29,7 +29,6 @@
 		18C46F3021000CBF005031C6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18C46F2F21000CBF005031C6 /* Settings.storyboard */; };
 		18C46F322100636F005031C6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C46F312100636F005031C6 /* SettingsViewController.swift */; };
 		18D00E4E21374EA100197F4A /* Pods-mac2phabricator-acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 18D00E4D21374EA000197F4A /* Pods-mac2phabricator-acknowledgements.markdown */; };
-		2B4B1EC2B4B0DBDE41B1791C /* Pods_mac2imgur.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208AA166C62216E4A19954C9 /* Pods_mac2imgur.framework */; };
 		822FCDF65E4AE8352EC1EFFE /* Pods_mac2phabricator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54E4827F2C6AE44FAF8E5509 /* Pods_mac2phabricator.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +60,6 @@
 		18C46F312100636F005031C6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		18D00E4D21374EA000197F4A /* Pods-mac2phabricator-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "Pods-mac2phabricator-acknowledgements.markdown"; path = "Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-acknowledgements.markdown"; sourceTree = "<group>"; };
 		18D00E4F21374F0600197F4A /* Pods-mac2phabricator-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "Pods-mac2phabricator-acknowledgements.markdown"; path = "Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-acknowledgements.markdown"; sourceTree = "<group>"; };
-		208AA166C62216E4A19954C9 /* Pods_mac2imgur.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mac2imgur.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54E4827F2C6AE44FAF8E5509 /* Pods_mac2phabricator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mac2phabricator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6059756D7D58CAB76984C20B /* Pods-mac2phabricator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac2phabricator.release.xcconfig"; path = "Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator.release.xcconfig"; sourceTree = "<group>"; };
 		CC8E2B73B90E4C8A3CD4580C /* Pods-mac2phabricator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mac2phabricator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B4B1EC2B4B0DBDE41B1791C /* Pods_mac2imgur.framework in Frameworks */,
 				822FCDF65E4AE8352EC1EFFE /* Pods_mac2phabricator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,7 +196,6 @@
 		DD52C5A51E5FCBB089C2EF1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				208AA166C62216E4A19954C9 /* Pods_mac2imgur.framework */,
 				54E4827F2C6AE44FAF8E5509 /* Pods_mac2phabricator.framework */,
 			);
 			name = Frameworks;
@@ -337,7 +333,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/EMCLoginItem/EMCLoginItem.framework",
 				"${BUILT_PRODUCTS_DIR}/LetsMove/LetsMove.framework",
@@ -350,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

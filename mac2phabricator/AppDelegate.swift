@@ -106,7 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func handleAppleEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
         // Attempt to parse response URL
         guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue,
-            let url = URL(string: urlString) else {
+            let _ = URL(string: urlString) else {
                 NSLog("Unable to determine URL from AppleEvent")
                 return
         }

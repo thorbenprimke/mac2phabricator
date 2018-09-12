@@ -22,6 +22,7 @@ class StatusItemMenuController: MenuController {
     let preferencesMenuController = PreferencesMenuController()
     let uploadsMenuController = UploadsMenuController()
     let aboutMenuController = AboutMenuController()
+    var windowController: NSWindowController?
     
     // MARK: MenuController
     
@@ -49,7 +50,7 @@ class StatusItemMenuController: MenuController {
         let appName = NSRunningApplication.current().localizedName ??
             ProcessInfo.processInfo.processName
         
-        menu.addItem(withTitle: "Quit mac2phab",
+        menu.addItem(withTitle: "Quit \(appName)",
                      action: #selector(NSApp.terminate(_:)),
                      target: nil)
         
@@ -78,10 +79,23 @@ class StatusItemMenuController: MenuController {
     }
     
     func openSettings() {
-        var windowController : NSWindowController!
-        let mainStoryBoard = NSStoryboard(name: "Settings", bundle: nil)
-        windowController = mainStoryBoard.instantiateController(withIdentifier: "SettingsWindowController") as! NSWindowController
-        windowController.showWindow(self)
+        // var windowController : NSWindowController!
+        guard let controller = windowController else {
+            let mainStoryBoard = NSStoryboard(name: "Settings", bundle: nil)
+            windowController = mainStoryBoard.instantiateController(withIdentifier: "SettingsWindowController") as? NSWindowController
+            windowController?.window?.delegate = self
+            windowController?.showWindow(self)
+            return
+        }
+       
+        // Activate the app and focus the settings window
         NSApp.activate(ignoringOtherApps: true)
+        controller.window?.makeKeyAndOrderFront(self)
+    }
+}
+
+extension StatusItemMenuController : NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        windowController = nil
     }
 }

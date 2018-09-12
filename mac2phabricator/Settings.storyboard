@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qmf-Ol-bOO">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qmf-Ol-bOO">
     <dependencies>
         <deployment version="101300" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,7 +10,7 @@
         <scene sceneID="kr9-5j-52j">
             <objects>
                 <windowController storyboardIdentifier="SettingsWindowController" showSeguePresentationStyle="single" id="Qmf-Ol-bOO" sceneMemberID="viewController">
-                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="H44-G6-Ajf">
+                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="Settings" animationBehavior="default" id="H44-G6-Ajf">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="1000" y="639" width="498" height="270"/>
@@ -97,8 +97,6 @@
                     </view>
                     <connections>
                         <outlet property="APIKeyInputField" destination="0mo-EO-TSn" id="tvd-r3-YFC"/>
-                        <outlet property="CancelButton" destination="rXT-NP-Jiz" id="x2T-8I-OLj"/>
-                        <outlet property="MyButton" destination="dfc-sY-sKu" id="Y6M-Bt-ROT"/>
                         <outlet property="PhabEndpointInputField" destination="6KM-lc-7Q6" id="jyf-44-VaA"/>
                     </connections>
                 </viewController>
