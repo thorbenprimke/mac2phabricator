@@ -6,6 +6,13 @@ import Foundation
 import Cocoa
 import AppKit
 
+// Apparently these aren't declared anywhere, but are implemented by NSWindow
+@objc protocol MenuActions {
+    func redo(_ sender: Any?)
+    func undo(_ sender: Any?)
+}
+
+
 class Mac2PhabApplication : NSApplication {
 
     private let commandKey = NSEventModifierFlags.command.rawValue
@@ -21,14 +28,17 @@ class Mac2PhabApplication : NSApplication {
                     case "v":
                         if sendAction(#selector(NSText.paste(_:)), to:nil, from:self) { return }
                     case "z":
-                        // TODO: Figure out who to call undo
-                        if sendAction(Selector(("undo:")), to:nil, from:self) { return }
+                        if sendAction(#selector(MenuActions.undo(_:)), to:nil, from:self) { return }
                     case "a":
                         if sendAction(#selector(NSResponder.selectAll(_:)), to:nil, from:self) { return }
                     case "w":
                         if sendAction(#selector(NSWindow.performClose(_:)), to: nil, from: self) { return }
                     default:
                         break
+                }
+            } else if (event.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue) == (NSEventModifierFlags.command.rawValue |  NSEventModifierFlags.shift.rawValue) {
+                if event.charactersIgnoringModifiers! == "Z" {
+                    if sendAction(#selector(MenuActions.redo(_:)), to: nil, from: self) { return }
                 }
             }
         }
