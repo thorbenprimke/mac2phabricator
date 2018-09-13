@@ -226,6 +226,7 @@ class PhabricatorClient: NSObject, ImageClient {
         manager.post(
             phabEndpoint + "/api/file.upload",
             parameters: params,
+            progress: nil,
             success: {
                 (task: URLSessionDataTask, responseObject: Any?) in
                 print("success")
@@ -251,6 +252,7 @@ class PhabricatorClient: NSObject, ImageClient {
         manager.post(
             PhabricatorImageStore.shared.settings.phabEndpoint + "/api/file.info",
             parameters: params,
+            progress: nil,
             success: {
                 (task: URLSessionDataTask, responseObject: Any?) in
                 print("success")

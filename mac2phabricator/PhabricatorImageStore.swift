@@ -108,6 +108,7 @@ class PhabricatorImageStore {
         manager.get(
             "https://phabricator.pinadmin.com/api/file.download",
             parameters: params,
+            progress: nil,
             success: {
                 (task: URLSessionDataTask, responseObject: Any?) in
 //                print("success")
