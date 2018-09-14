@@ -12,11 +12,11 @@ PODS:
   - AFNetworking/Reachability (3.1.0)
   - AFNetworking/Security (3.1.0)
   - AFNetworking/Serialization (3.1.0)
-  - Crashlytics (3.8.5):
-    - Fabric (~> 1.6.3)
+  - Crashlytics (3.10.7):
+    - Fabric (~> 1.7.11)
   - EMCLoginItem (1.0.1)
-  - Fabric (1.6.12)
-  - LetsMove (1.22)
+  - Fabric (1.7.11)
+  - LetsMove (1.24)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -35,10 +35,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
   EMCLoginItem: ac4a198cda3f4a8dc72797d2e89ad6c640624835
-  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
-  LetsMove: 407d4d14815e6dc1549b6a9fe8e4b0f6aed3e305
+  Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
+  LetsMove: fefe56bc7bc7fb7d37049e28a14f297961229fc5
 
 PODFILE CHECKSUM: 4616d82e0b94362237785261f557db65d8a8b5d7
 

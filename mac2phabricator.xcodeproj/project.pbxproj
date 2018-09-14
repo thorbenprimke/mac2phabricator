@@ -333,7 +333,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/EMCLoginItem/EMCLoginItem.framework",
 				"${BUILT_PRODUCTS_DIR}/LetsMove/LetsMove.framework",
@@ -346,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mac2phabricator/Pods-mac2phabricator-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
