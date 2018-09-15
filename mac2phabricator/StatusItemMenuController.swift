@@ -47,7 +47,7 @@ class StatusItemMenuController: MenuController {
         menu.addItem(withTitle: aboutMenuController.menuTitle,
                      submenu: self.aboutMenuController.menu)
         
-        let appName = NSRunningApplication.current().localizedName ??
+        let appName = NSRunningApplication.current.localizedName ??
             ProcessInfo.processInfo.processName
         
         menu.addItem(withTitle: "Quit \(appName)",
@@ -57,7 +57,7 @@ class StatusItemMenuController: MenuController {
     }
     
     /// Opens a file selection prompt for uploading images
-    func selectImages() {
+    @objc func selectImages() {
         let panel = NSOpenPanel()
         panel.title = "Select Images"
         panel.prompt = "Upload"
@@ -66,7 +66,7 @@ class StatusItemMenuController: MenuController {
         panel.allowedFileTypes = [kUTTypeImage as String]
         
         panel.begin { (result) -> Void in
-            if result == NSModalResponseOK {
+            if result == NSApplication.ModalResponse.OK {
                 for url in panel.urls {
                     PhabricatorClient.shared.uploadImage(withURL: url,
                                                    isScreenshot: false)
@@ -78,11 +78,11 @@ class StatusItemMenuController: MenuController {
         NSApp.activate(ignoringOtherApps: true)
     }
     
-    func openSettings() {
+    @objc func openSettings() {
         // var windowController : NSWindowController!
         guard let controller = windowController else {
-            let mainStoryBoard = NSStoryboard(name: "Settings", bundle: nil)
-            windowController = mainStoryBoard.instantiateController(withIdentifier: "SettingsWindowController") as? NSWindowController
+            let mainStoryBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Settings"), bundle: nil)
+            windowController = mainStoryBoard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SettingsWindowController")) as? NSWindowController
             windowController?.window?.delegate = self
             windowController?.showWindow(self)
             return

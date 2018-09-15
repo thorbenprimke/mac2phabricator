@@ -93,7 +93,7 @@ class PhabricatorClient: NSObject, ImageClient {
         alert.icon = NSImage(data: imageData)
         
         NSApp.activate(ignoringOtherApps: true)
-        return alert.runModal() == NSAlertFirstButtonReturn
+        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
     
     /// Returns a PNG image representation data of the supplied image data,
@@ -122,7 +122,7 @@ class PhabricatorClient: NSObject, ImageClient {
             samplesPerPixel: 4,
             hasAlpha: true,
             isPlanar: false,
-            colorSpaceName: NSCalibratedRGBColorSpace,
+            colorSpaceName: NSColorSpaceName.calibratedRGB,
             bytesPerRow: 0,
             bitsPerPixel: 0) else {
                 NSLog("Resize failed: Unable to create bitmap image representation")
@@ -130,12 +130,12 @@ class PhabricatorClient: NSObject, ImageClient {
         }
         
         NSGraphicsContext.saveGraphicsState()
-        NSGraphicsContext.setCurrent(NSGraphicsContext(bitmapImageRep: bitmapImageRep))
+        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmapImageRep)
         image.draw(in: NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
         NSGraphicsContext.restoreGraphicsState()
         
         // Use a PNG representation of the resized image
-        guard let resizedRep = bitmapImageRep.representation(using: .PNG, properties: [:]) else {
+        guard let resizedRep = bitmapImageRep.representation(using: .png, properties: [:]) else {
             NSLog("Resize failed: Unable to create PNG representation")
             return nil
         }
@@ -178,7 +178,7 @@ class PhabricatorClient: NSObject, ImageClient {
             
             // Move the image to trash if required
             if Preference.deleteScreenshotsAfterUpload.value {
-                NSWorkspace.shared().recycle([imageURL], completionHandler: nil)
+                NSWorkspace.shared.recycle([imageURL], completionHandler: nil)
             }
             
         }
@@ -200,7 +200,7 @@ class PhabricatorClient: NSObject, ImageClient {
         
         // Clear clipboard if required
         if Preference.clearClipboard.value {
-            NSPasteboard.general().clearContents()
+            NSPasteboard.general.clearContents()
         }
         
         let apiKey  = PhabricatorImageStore.shared.settings.apiKey
@@ -270,9 +270,9 @@ class PhabricatorClient: NSObject, ImageClient {
                 // put data into clipboard
                 // Copy link to clipboard if required
                 if Preference.copyLinkToClipboard.value, !copyToClipboardLink.isEmpty {
-                    NSPasteboard.general().clearContents()
-                    NSPasteboard.general()
-                        .setString(copyToClipboardLink, forType: NSPasteboardTypeString)
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general
+                        .setString(copyToClipboardLink, forType: NSPasteboard.PasteboardType.string)
                 }
                 
                 UserNotificationController.shared.displayNotification(

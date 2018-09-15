@@ -17,6 +17,9 @@
 import Cocoa
 import AFNetworking
 
+// Hack around NSFilenamesPboardType not existing in Swift 4
+private let NSFilenamesPboardType = NSPasteboard.PasteboardType("NSFilenamesPboardType")
+
 class StatusItemController: NSObject, NSWindowDelegate, NSDraggingDestination {
     
     let statusItem: NSStatusItem
@@ -25,8 +28,8 @@ class StatusItemController: NSObject, NSWindowDelegate, NSDraggingDestination {
     var currentOperationCount = 0
     
     override init() {
-        statusItem = NSStatusBar.system().statusItem(
-            withLength: NSVariableStatusItemLength)
+        statusItem = NSStatusBar.system.statusItem(
+            withLength: NSStatusItem.variableLength)
         
         statusItemMenuController = StatusItemMenuController()
         
@@ -39,7 +42,7 @@ class StatusItemController: NSObject, NSWindowDelegate, NSDraggingDestination {
         if #available(macOS 10.10, *) {
             statusItem.button?.window?.delegate = self
             statusItem.button?.window?
-                .registerForDraggedTypes([NSFilenamesPboardType, NSTIFFPboardType])
+                .registerForDraggedTypes([NSFilenamesPboardType, NSPasteboard.PasteboardType.tiff])
         }
         
         NotificationCenter.default.addObserver(forName: .AFNetworkingTaskDidResume,
@@ -68,7 +71,7 @@ class StatusItemController: NSObject, NSWindowDelegate, NSDraggingDestination {
     }
     
     deinit {
-        NSStatusBar.system().removeStatusItem(statusItem)
+        NSStatusBar.system.removeStatusItem(statusItem)
     }
     
     // MARK: NSDraggingDestination
@@ -87,7 +90,7 @@ class StatusItemController: NSObject, NSWindowDelegate, NSDraggingDestination {
     }
     
     func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        if let data = sender.draggingPasteboard().data(forType: NSTIFFPboardType) {
+        if let data = sender.draggingPasteboard().data(forType: NSPasteboard.PasteboardType.tiff) {
             PhabricatorClient.shared.uploadImage(withData: data)
             return true
         } else if let paths = sender.draggingPasteboard().propertyList(forType: NSFilenamesPboardType) as? [String] {

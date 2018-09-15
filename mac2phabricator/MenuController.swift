@@ -29,7 +29,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
     
     /// Creates the menu from scratch.
-    func buildMenu() {
+    @objc func buildMenu() {
         menu.removeAllItems()
         
         // Menu creation logic

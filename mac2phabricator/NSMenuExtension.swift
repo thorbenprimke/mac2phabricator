@@ -23,7 +23,7 @@ extension NSMenu {
                  action: Selector? = nil,
                  target: AnyObject? = nil,
                  representedObject: AnyObject? = nil,
-                 state: Int = NSOffState,
+                 state: NSControl.StateValue = NSControl.StateValue.off,
                  submenu: NSMenu? = nil) {
         
         let menuItem = NSMenuItem()
@@ -49,9 +49,9 @@ extension NSMenu {
         menuItem.attributedTitle = NSAttributedString(
             string: title,
             attributes: [
-                NSFontAttributeName: NSFont.systemFont(
-                    ofSize: NSFont.smallSystemFontSize()),
-                NSParagraphStyleAttributeName: paragraphStyle
+                NSAttributedStringKey.font: NSFont.systemFont(
+                    ofSize: NSFont.smallSystemFontSize),
+                NSAttributedStringKey.paragraphStyle: paragraphStyle
             ])
         
         addItem(menuItem)

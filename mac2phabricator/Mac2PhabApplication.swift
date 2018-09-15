@@ -15,11 +15,11 @@ import AppKit
 
 class Mac2PhabApplication : NSApplication {
 
-    private let commandKey = NSEventModifierFlags.command.rawValue
+    private let commandKey = NSEvent.ModifierFlags.command.rawValue
 
     override func sendEvent(_ event: NSEvent) {
-        if (event.type == NSEventType.keyDown) {
-            if (event.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue) == commandKey {
+        if (event.type == NSEvent.EventType.keyDown) {
+            if (event.modifierFlags.rawValue & NSEvent.ModifierFlags.deviceIndependentFlagsMask.rawValue) == commandKey {
                 switch event.charactersIgnoringModifiers! {
                     case "x":
                         if sendAction(#selector(NSText.cut(_:)), to:nil, from:self) { return }
@@ -36,7 +36,7 @@ class Mac2PhabApplication : NSApplication {
                     default:
                         break
                 }
-            } else if (event.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue) == (NSEventModifierFlags.command.rawValue |  NSEventModifierFlags.shift.rawValue) {
+            } else if (event.modifierFlags.rawValue & NSEvent.ModifierFlags.deviceIndependentFlagsMask.rawValue) == (NSEvent.ModifierFlags.command.rawValue |  NSEvent.ModifierFlags.shift.rawValue) {
                 if event.charactersIgnoringModifiers! == "Z" {
                     if sendAction(#selector(MenuActions.redo(_:)), to: nil, from: self) { return }
                 }

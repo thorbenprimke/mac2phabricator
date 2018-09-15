@@ -39,11 +39,13 @@ class PreferencesMenuController: MenuController {
             
             // Add launch at login option to the top of the general category
             if category == .general, let loginItem = loginItem {
+                let state = loginItem.isLoginItem() ? NSControl.StateValue.on : NSControl.StateValue.off
                 menu.addItem(withTitle: "Launch at Login",
                              action: #selector(toggleLaunchAtLogin),
                              target: self,
-                             state: loginItem.isLoginItem() ? NSOnState : NSOffState)
+                             state: state)
             }
+            
             
             for preference in Preference.allValues
                 where preference.category == category {
@@ -56,7 +58,7 @@ class PreferencesMenuController: MenuController {
                     
                     let menuItem = NSMenuItem()
                     menuItem.title = preference.description
-                    menuItem.bind("value",
+                    menuItem.bind(NSBindingName(rawValue: "value"),
                                   to: UserDefaults.standard,
                                   withKeyPath: preference.rawValue,
                                   options: nil)
@@ -68,15 +70,13 @@ class PreferencesMenuController: MenuController {
     // MARK: General
     
     var hasRetinaDisplay: Bool {
-        if let screens = NSScreen.screens() {
-            for screen in screens where screen.backingScaleFactor > 1 {
-                return true
-            }
+        for screen in NSScreen.screens where screen.backingScaleFactor > 1 {
+            return true
         }
         return false
     }
     
-    func toggleLaunchAtLogin(_ sender: NSMenuItem) {
+    @objc func toggleLaunchAtLogin(_ sender: NSMenuItem) {
         guard let loginItem = loginItem else {
             return
         }

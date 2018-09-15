@@ -29,13 +29,13 @@ class PhabricatorImage: NSObject, NSCoding {
         self.objectName = objectName
     }
 
-    func copyURL() {
-        NSPasteboard.general().clearContents()
-        NSPasteboard.general().setString(objectName, forType: NSStringPboardType)
+    @objc func copyURL() {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(objectName, forType: NSPasteboard.PasteboardType.string)
     }
     
     func openPageURL() {
         let url = URL(string: PhabricatorImageStore.shared.settings.phabEndpoint + objectName)
-        NSWorkspace.shared().open(url!)
+        NSWorkspace.shared.open(url!)
     }
 }

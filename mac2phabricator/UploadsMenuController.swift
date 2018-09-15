@@ -75,7 +75,7 @@ class UploadsMenuController: MenuController {
         return menu
     }
 
-    func clearUploads() {
+    @objc func clearUploads() {
         PhabricatorImageStore.shared.clearAll()
     }
 }

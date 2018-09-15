@@ -59,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSUserNotificationCenter.default.delegate = UserNotificationController.shared
         
         // Handle the notification supplied if the application has been launched from the notification center
-        if let userNotification = notification.userInfo?[NSApplicationLaunchUserNotificationKey] as? NSUserNotification {
+        if let userNotification = notification.userInfo?[NSApplication.launchUserNotificationUserInfoKey] as? NSUserNotification {
             UserNotificationController.shared.userNotificationCenter(.default, didActivate: userNotification)
         }
         
@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: NSAppleEventManager Event Handler
     
-    func handleAppleEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
+    @objc func handleAppleEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
         // Attempt to parse response URL
         guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue,
             let _ = URL(string: urlString) else {

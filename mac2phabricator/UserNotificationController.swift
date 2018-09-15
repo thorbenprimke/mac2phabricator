@@ -25,7 +25,7 @@ class UserNotificationController: NSObject, NSUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
         // Open URL if present in the informativeText field of a notification
         if let text = notification.informativeText, let url = URL(string: text) {
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
     
